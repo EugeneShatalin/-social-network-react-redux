@@ -1,8 +1,23 @@
-.header {
-    grid-area: h;
-    background-color: chartreuse;
+.dialogs {
+    display: grid;
+    grid-template-columns: 2fr 10fr;
+
 }
 
-.header img {
-    width: 50px;
+.dialogsItems {
+    padding: 10px;
+}
+
+.dialog {
+}
+
+.active {
+    color: gold;
+}
+
+.massages {
+    padding: 10px;
+}
+
+.message {
 }
