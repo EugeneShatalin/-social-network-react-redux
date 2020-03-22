@@ -20,6 +20,6 @@ const Navbar = () => {
             <NavLink to="/settings" activeClassName={s.active}>Settings</NavLink>
         </div>
     </nav>
-}
+};
 
 export  default Navbar;
