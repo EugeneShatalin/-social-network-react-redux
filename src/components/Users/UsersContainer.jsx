@@ -1,5 +1,4 @@
 import React from 'react';
-import connect from 'react-redux/lib/connect/connect';
 import {
     follow,
     unfollow,
@@ -11,6 +10,7 @@ import {
 import * as axios from 'axios';
 import Users from './Users';
 import Preloader from "../common/Preloader/Preloader";
+import connect from "react-redux/lib/connect/connect";
 
 class UsersContainer extends React.Component {
     componentDidMount() {
