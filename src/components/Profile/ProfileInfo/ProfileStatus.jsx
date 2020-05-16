@@ -1,11 +1,11 @@
 import React from 'react';
-import s from "./ProfileInfo.module.css";
-import Preloader from "../../common/Preloader/Preloader";
+
 
 
 class ProfileStatus extends React.Component {
     state = {
-        editMode: false
+        editMode: false,
+        status: this.props.status
     }
     activateEditMode = () => {
         this.setState({
@@ -15,6 +15,13 @@ class ProfileStatus extends React.Component {
     deactivateEditMode = () => {
         this.setState({
             editMode: false
+        });
+        this.props.updateStatus(this.state.status);
+    }
+
+    onStatusChange = (e) => {
+        this.setState({
+            status: e.currentTarget.value
         })
     }
 
@@ -23,14 +30,15 @@ class ProfileStatus extends React.Component {
             <div>
                 {!this.state.editMode &&
                 <div>
-                    <span onDoubleClick={this.activateEditMode}>{this.props.status}</span>
+                    <span onDoubleClick={this.activateEditMode}>{this.props.status || "No status"}</span>
                 </div>
                 }
                 {this.state.editMode &&
                 <div>
-                    <input value={this.props.status}
+                    <input value={this.state.status}
                            onBlur={this.deactivateEditMode}
                            autoFocus={true}
+                           onChange={this.onStatusChange}
                     ></input>
                 </div>}
 
