@@ -8,7 +8,7 @@ import {
 } from '../../redux/users-reducer';
 import Users from './Users';
 import Preloader from "../common/Preloader/Preloader";
-import connect from "react-redux/lib/connect/connect";
+import {connect} from "react-redux";
 import {compose} from "redux";
 import {withAuthRedirect} from "../../hoc/withAuthRedirect";
 
@@ -51,20 +51,15 @@ let mapStateToProps = (state) => {
 
 export default compose(
     withAuthRedirect,
-    connect(mapStateToProps, {
-        follow: followSuccess,
-        unfollow: unfollowSuccess,
-        setCurrentPage,
-        toggleFollowingProgress,
-        getUsers
-    })
+    //connect функция из react-redux, которая создает контейнеруную компаненту для
+    // передачи и получения данных из store через контекст созданный в index.js с
+    // помощью <Provider store={store}>
+    connect(mapStateToProps,
+        {//обьект с экшенкриэйторами
+            follow: followSuccess,
+            unfollow: unfollowSuccess,
+            setCurrentPage,
+            toggleFollowingProgress,
+            getUsers
+        })
 )(UsersContainer);
-
-/*
-export default connect(mapStateToProps, {
-    follow: followSuccess,
-    unfollow: unfollowSuccess,
-    setCurrentPage,
-    toggleFollowingProgress,
-    getUsers
-})(UsersContainer);*/

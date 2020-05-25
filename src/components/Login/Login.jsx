@@ -1,7 +1,40 @@
 import React from 'react';
+import {Field, reduxForm} from "redux-form";
 
-const Login = () => {
-    return <h1>LOGIN</h1>
-}
+
+const LoginForm = (props) => {
+
+    return (
+        <form onSubmit={props.handleSubmit}> {/*handleSubmit прокидывает сюда контейнерная компонента
+                                                reduxForm из библиотеки  redux-form*/}
+            <div>
+                <Field placeholder={"Login"} name={"login"} component={"input"}/>
+            </div>
+            <div>
+                <Field placeholder={"Password"} name={"password"} component={"input"}/>
+            </div>
+            <div>
+                <Field component={"input"} name={"rememberMe"} type="checkbox"/> remember me
+            </div>
+            <div>
+                <button>Login</button>
+            </div>
+        </form>
+    )
+};
+
+const LoginReduxForm = reduxForm({form: 'login'})(LoginForm); {/*reduxForm - HOC который образует контейнерную
+                                                                    компоненту для работы с form*/}
+
+const Login = (props) => {
+    const onSubmit = (formData) => {}
+    return (
+        <div>
+            <h1>LOGIN</h1>
+            <LoginReduxForm onSubmit={onSubmit}/>
+        </div>
+    )
+};
 
 export default Login;
+

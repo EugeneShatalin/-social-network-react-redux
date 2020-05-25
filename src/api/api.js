@@ -1,10 +1,11 @@
 import * as axios from "axios";
 
+//настройка повторяющихся параметров запроса
 const instance = axios.create({
-    withCredentials: true,
-    baseURL: `https://social-network.samuraijs.com/api/1.0/`,
-    headers: {
-        "API-KEY": "305af354-4c54-4e6b-a5cb-7185c6ed3f40"
+    withCredentials: true, //передача авторизационных данных из кук на сервер
+    baseURL: `https://social-network.samuraijs.com/api/1.0/`, //базовый URL повторяющийся в запросах
+    headers: { //набор параметров определенный в настройках сервера
+        "API-KEY": "305af354-4c54-4e6b-a5cb-7185c6ed3f40"  //в нашем случае передаем ключь подтверждения авторизации
     }
 });
 

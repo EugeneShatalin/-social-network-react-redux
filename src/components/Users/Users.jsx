@@ -19,6 +19,8 @@ let Users = (props) => {
                              }}>{p}</span>
             })}
         </div>
+
+        {/*перебераем массив пользователей с помощью map и отрисовываем каждого*/}
         {props.users.map(u => <div key={u.id}>
                <span>
                    <div>

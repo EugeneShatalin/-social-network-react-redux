@@ -20,5 +20,8 @@ let mapDispatchToProps = (dispatch) => {
     }
 };
 const MyPostsContainer = connect (mapStateToProps, mapDispatchToProps) (MyPosts);
+//connect функция из react-redux, которая создает контейнеруную компаненту для
+// передачи и получения данных из store через контекст созданный в index.js с
+// помощью <Provider store={store}>
 
 export default MyPostsContainer;

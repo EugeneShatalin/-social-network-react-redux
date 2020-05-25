@@ -5,27 +5,24 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import store from "./redux/redux-store";
-import Provider from "react-redux/lib/components/Provider";
 import {BrowserRouter} from "react-router-dom";
+import {Provider} from "react-redux";
 
 
-let rerenderEntireTree;
-rerenderEntireTree = () => {
+let rerenderEntireTree = () => { //фукнцция для запуска отрисовки всего приложения
     ReactDOM.render(
         <BrowserRouter>
-            <Provider store={store}>
-                <App/>
+            <Provider store={store}>    {/*Provider метод из react-redux для проброса
+                                        store в контекст(доступен глобально для дочерних компонент)
+                                        доступен через connect*/}
+                <App />
             </Provider>
         </BrowserRouter>,
         document.getElementById('root'));
 };
 
-rerenderEntireTree();
+rerenderEntireTree(); //здесь запускается отрисовка приложения в самый первый раз
 
-store.subscribe(() => {
-    let state = store.getState();
-    rerenderEntireTree(state);
-});
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.

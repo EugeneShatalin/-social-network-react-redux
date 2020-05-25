@@ -1,5 +1,5 @@
 import {usersAPI} from "../api/api";
-
+//константы для определения типов (type) экшенов (action) для исключения ошибок при написании
 const FOLLOW = 'FOLLOW';
 const SET_USERS = 'SET_USERS';
 const UNFOLLOW = 'UNFOLLOW';
@@ -8,16 +8,17 @@ const SET_TOTAL_USERS_COUNT = 'SET_TOTAL_USERS_COUNT';
 const TOGGLE_IS_FETCHING = 'TOGGLE_IS_FETCHING';
 const TOGGLE_IS_FOLLOWING_PROGRESS = 'TOGGLE_IS_FOLLOWING_PROGRESS';
 
-
+//инициализация первичных данных для state
 let initialState = {
     users: [],
-    pageSize: 5,
-    totalUsersCount: 20,
-    currentPage: 1,
+    pageSize: 5, //количество пользователей отоброжающихся на странице
+    totalUsersCount: 20, //общее число пользователей
+    currentPage: 1, //номер текущей страницы
     isFetching: true,
-    followingInProgress: []
+    followingInProgress: [] //парамметры для блокировки кнопки в ожидании ответа от сервера
 };
 
+//блок по обработке экшенов (action) и пиходящих с ними данных
 const usersReducer = (state = initialState, action) => {
     switch (action.type) {
         case FOLLOW:
@@ -60,6 +61,8 @@ const usersReducer = (state = initialState, action) => {
     }
 };
 
+// блок функций (action creator) для пропроса в диспачи методов и свойств
+//функции колбеки экшен криэйторы (action creat) для правильной передаци данных из места их вызова в редьюсеры
 export const followSuccess = (userId) => ({type: FOLLOW, userId});
 export const unfollowSuccess = (userId) => ({type: UNFOLLOW, userId});
 export const setUsers = (users) => ({type: SET_USERS, users});
@@ -72,6 +75,7 @@ export const toggleFollowingProgress = (isFetching, userId) => ({
     userId
 });
 
+//thunk 
 export const getUsers = (currentPage, pageSize) => {
     return (dispatch) => {
         dispatch(toggleIsFetching(true));
@@ -83,6 +87,7 @@ export const getUsers = (currentPage, pageSize) => {
     }
 };
 
+//thunk
 export const follow = (userId) => {
     return (dispatch) => {
         dispatch(toggleFollowingProgress(true, userId));
@@ -96,6 +101,7 @@ export const follow = (userId) => {
         };
 };
 
+//thunk
 export const unfollow = (userId) => {
     return (dispatch) => {
         dispatch(toggleFollowingProgress(true, userId));

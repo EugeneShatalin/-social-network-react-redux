@@ -1,10 +1,11 @@
 import {profileAPI, usersAPI} from "../api/api";
-
+//константы для определения типов (type) экшенов (action) для исключения ошибок при написании
 const ADD_POST = 'ADD-POST';
 const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT';
 const SET_USER_PROFILE = 'SET_USER_PROFILE';
 const SET_STATUS = 'SET_STATUS';
 
+//инициализация первичных данных для state
 let initialState = {
     posts: [
         {id: 1, message: "Hi, how are you?", likesCount: 12},
@@ -15,6 +16,7 @@ let initialState = {
     status: ''
 };
 
+//блок по обработке экшенов (action) и пиходящих с ними данных
 const profileReducer = (state = initialState, action) => {
     switch (action.type) {
         case ADD_POST:
@@ -48,6 +50,8 @@ const profileReducer = (state = initialState, action) => {
     }
 };
 
+// блок функций (action creator) для пропроса в диспачи методов и свойств
+//функции колбеки экшен криэйторы (action creat) для правильной передаци данных из места их вызова в редьюсеры
 export const addPostActionCreator = () => ({type: ADD_POST});
 export const setUserProfile = (profile) => ({type: SET_USER_PROFILE, profile});
 export const updateNewPostTextCreator = (text) => ({type: UPDATE_NEW_POST_TEXT, newText: text});

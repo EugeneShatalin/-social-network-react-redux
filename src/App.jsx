@@ -9,20 +9,22 @@ import HeaderContainer from "./components/Header/HeaderContainer";
 import LoginPage from "./components/Login/Login";
 
 
-
-
-const App = () => {
+const App = (props) => {
     return (
         <div className='app-wrapper'>
             <HeaderContainer/>
             <Navbar/>
             <div className='app-wrapper-content'>
-                <Route path='/dialogs'
-                        render={() => <DialogsContainer/>}/>
-                <Route path='/profile/:userId?'
-                        render={() => <ProfileContainer/>}/>
+                <Route path='/dialogs' //Route компонета контролирующая состояние строки URL при совпадении
+                    // адреса отрисовывает нужную компоненту без перезагрузки всей страницы
+                       render={() => <DialogsContainer/>}
+                    //метод render используеться для вызова анонимной функции,
+                    // которая отрисовывает компоненту, это для передачи props
+                />
+                <Route path='/profile/:userId?' //:userId? параметр url
+                       render={() => <ProfileContainer/>}/>
                 <Route path='/users'
-                        render={() => <UsersContainer/>}/>
+                       render={() => <UsersContainer/>}/>
                 <Route path='/login'
                        render={() => <LoginPage />}/>
             </div>
