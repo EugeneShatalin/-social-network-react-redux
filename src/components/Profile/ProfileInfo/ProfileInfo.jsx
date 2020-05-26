@@ -15,6 +15,7 @@ const ProfileInfo = (props) => {
             <ProfileStatus status={props.status} updateStatus={props.updateStatus}/>
         </div>
     </div>
+
 }
 
 export default ProfileInfo;

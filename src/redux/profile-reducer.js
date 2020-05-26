@@ -1,7 +1,6 @@
 import {profileAPI, usersAPI} from "../api/api";
 //константы для определения типов (type) экшенов (action) для исключения ошибок при написании
 const ADD_POST = 'ADD-POST';
-const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT';
 const SET_USER_PROFILE = 'SET_USER_PROFILE';
 const SET_STATUS = 'SET_STATUS';
 
@@ -11,7 +10,6 @@ let initialState = {
         {id: 1, message: "Hi, how are you?", likesCount: 12},
         {id: 2, message: "It's my first program.", likesCount: 24}
     ],
-    newPostText: 'it-kamasutra.com',
     profile: null,
     status: ''
 };
@@ -22,18 +20,12 @@ const profileReducer = (state = initialState, action) => {
         case ADD_POST:
             let newPost = {
                 id: 5,
-                message: state.newPostText,
+                message: action.newPostText,
                 likeCount: 0
             };
             return {
                 ...state,
                 posts: [...state.posts, newPost],
-                newPostText: ''
-            };
-        case UPDATE_NEW_POST_TEXT:
-            return {
-                ...state,
-                newPostText: action.newText
             };
         case SET_USER_PROFILE:
             return {
@@ -52,9 +44,8 @@ const profileReducer = (state = initialState, action) => {
 
 // блок функций (action creator) для пропроса в диспачи методов и свойств
 //функции колбеки экшен криэйторы (action creat) для правильной передаци данных из места их вызова в редьюсеры
-export const addPostActionCreator = () => ({type: ADD_POST});
+export const addPostActionCreator = (newPostText) => ({type: ADD_POST, newPostText});
 export const setUserProfile = (profile) => ({type: SET_USER_PROFILE, profile});
-export const updateNewPostTextCreator = (text) => ({type: UPDATE_NEW_POST_TEXT, newText: text});
 export const setStatus = (status) => ({type: SET_STATUS, status});
 
 export const getUserprofile = (userId) => (dispatch) => {
@@ -67,7 +58,6 @@ export const getUserprofile = (userId) => (dispatch) => {
 export const getStatus = (userId) => (dispatch) => {
     profileAPI.getStatus(userId)
         .then(response => {
-            debugger;
             dispatch(setStatus(response.data));
         })
 };

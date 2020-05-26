@@ -1,38 +1,42 @@
 import React from 'react';
 import s from "./MyPosts.module.css";
 import Post from "./Post/Post";
+import {Field, reduxForm} from "redux-form";
 
 
 const MyPosts = (props) => {
-    let postsElements = props.posts.map(p => <Post message={p.message} like={p.likesCount}/>);
-    let newPostElement = React.createRef();
+    let postsElements = props.posts.map(p => <Post key={p.id} message={p.message} like={p.likesCount}/>);
 
-    let onAddPost = () => {
-        props.addPost();
-    };
-
-    let onPostChange = () => {
-        let text = newPostElement.current.value;
-        props.updateNewPostText(text);
+    let onAddPost = (value) => {
+        props.addPost(value.newPostText);
     };
 
     return <div className={s.postsBlock}>
         <div>
             <h3>My posts</h3>
-            <div>
-                <div>
-                    <textarea onChange={onPostChange} ref={newPostElement}
-                              value={props.newPostText}/>
-                </div>
-                <div>
-                    <button onClick={onAddPost}>Add post</button>
-                </div>
-            </div>
+            <OnAddPostInProfile onSubmit={onAddPost}/>
         </div>
         <div className={s.posts}>
             {postsElements}
         </div>
     </div>
 };
+
+const AddNewPostForm = (props) => {
+    return <form onSubmit={props.handleSubmit}>{/*handleSubmit прокидывает сюда контейнерная компонента
+                                                reduxForm из библиотеки  redux-form,
+                                                handleSubmit собирает в себе все данные из формы*/}
+        <div>
+            <Field component="textarea" name="newPostText" /> {/*Field компонента из redux-form для отрисовки и обработки полей формы
+                                                                                     обязательно указывать значение component и name*/}
+        </div>
+        <div>
+            <button >Add post</button>
+        </div>
+    </form>
+}
+
+const OnAddPostInProfile = reduxForm({form: "ProfileAddNewPostForm"})(AddNewPostForm); {/*reduxForm - HOC который образует контейнерную
+                                                                                        компоненту для работы с form*/}
 
 export default MyPosts;
