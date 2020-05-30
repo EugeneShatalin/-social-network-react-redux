@@ -9,6 +9,7 @@ const instance = axios.create({
     }
 });
 
+//usersAPI для работы с данными для Users страницы
 export const usersAPI = {
     getUsers(currentPage = 1, pageSize = 10) {
         return instance.get(`users?page=${currentPage}&count=${pageSize}`).then(response => {
@@ -27,6 +28,7 @@ export const usersAPI = {
     }
 };
 
+//usersAPI для работы с данными для Profile страницы
 export const profileAPI = {
     getProfile(userId) {
         return  instance.get(`profile/` + userId);
@@ -42,5 +44,11 @@ export const profileAPI = {
 export const authAPI = {
     me() {
        return  instance.get(`auth/me`)
+    },
+    login (email, password, rememberMe = false) {
+        return instance.post(`auth/login`, {email, password, rememberMe})
+    },
+    logout () {
+        return instance.delete(`auth/login`)
     }
 };

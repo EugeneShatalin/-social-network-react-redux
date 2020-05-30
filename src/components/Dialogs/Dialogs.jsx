@@ -3,6 +3,9 @@ import s from './Dialogs.module.css'
 import DialogItem from "./DialogItem/DialogItem";
 import Message from "./Message/Message";
 import {Field, reduxForm} from "redux-form";
+import {Textarea} from "../common/FormControls/FormsControls";
+import {maxLengthCreator, required} from "../../utils/validators/validators";
+import {AddMessageFormRedux} from "./AddMessageForm/AddMessageForm";
 
 const Dialogs = (props) => {
 
@@ -35,23 +38,5 @@ const Dialogs = (props) => {
     )
 };
 
-const AddMessageForm = (props) => {
-    return (
-        <form onSubmit={props.handleSubmit}>{/*handleSubmit прокидывает сюда контейнерная компонента
-                                                reduxForm из библиотеки  redux-form,
-                                                handleSubmit собирает в себе все данные из формы*/}
-            <div>
-                <Field component="textarea" name="newMessageBody" placeholder="Enter your message"/> {/*Field компонента из redux-form для отрисовки и обработки полей формы
-                                                                                     обязательно указывать значение component и name*/}
-            </div>
-            <div>
-                <button>Send</button>
-            </div>
-        </form>
-    )
-}
-
-const AddMessageFormRedux = reduxForm({form: "dialogAddMessageForm"})(AddMessageForm); {/*reduxForm - HOC который образует контейнерную
-                                                                    компоненту для работы с form*/}
 
 export default Dialogs;
