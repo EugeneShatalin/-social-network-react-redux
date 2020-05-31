@@ -6,6 +6,7 @@ import usersReducer from "./users-reducer";
 import authReducer from "./auth-reducer";
 import thunkMiddleware from 'redux-thunk'; //для обработки диспачей thunk
 import {reducer as formReducer } from 'redux-form';
+import appReducer from "./app-reducer";
 
 //для передачи всех reducers в store
 //обьединяем их с помощью метода combineReducers из redux
@@ -17,6 +18,7 @@ let reducers = combineReducers({
     usersPage: usersReducer,
     auth: authReducer,
     form: formReducer, /*импортируем из redux-form*/
+    app: appReducer,
 });
 
 //создаем store с помщью метода createStore из библиотеки redux,
