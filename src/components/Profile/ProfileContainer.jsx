@@ -32,7 +32,9 @@ class ProfileContainer extends React.Component {
 //функция возвращающая объект из необходиммых данных из state, находящихся в store
 let mapStateToProps = (state) => ({
     profile: state.profilePage.profile,
-    status: state.profilePage.status
+    status: state.profilePage.status,
+    authorizedUserId: state.auth.userId,
+    isAuth: state.auth.isAuth
 })
 
 //Функция compose служит для создания контейнерных компонент вокруг исходной при помощи HOC,
